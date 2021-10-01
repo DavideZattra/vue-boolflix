@@ -11,19 +11,31 @@
                 <div id="ms_searchbar" class="col-8 d-flex justify-content-end align-items-center">
 
                     <input type="text" v-model="searchKey" @keyup.enter="$emit('getsearchkey', searchKey)">
-                    <button class="btn btn-light" @click="getMovies()">click</button>
+                    <button class="btn btn-light" @click="getVideo()">click</button>
                     
                 </div>
 
-                <div v-for="(element,index) in movieArray" :key="index">
+                <div class="col-2 border ms_movie" v-for="(element,index) in movieList" :key="index"  >
 
-                    <ol>
+                    <ol  >
                         <li>{{ element.title }}</li>
                         <li>{{ element.original_title }}</li>
                         <li v-if="element.original_language === 'it'"><img src="../assets/Flag_of_Italy.svg.png" alt=""></li>
                         <li  v-else-if="element.original_language === 'en'"><img src="../assets/ukFlag.svg.png" alt=""></li>
                         <li>{{ element.vote_average }}</li>
-                        <li>{{ element.original_language }}</li>
+                        <!-- <li>{{ element.original_language }}</li> -->
+
+                    </ol>
+
+                </div>
+                <div class="col-2 border ms_tvserie" v-for="(element,index) in tvList" :key="index"  >
+
+                    <ol  >
+                        <li>{{ element.name }}</li>
+                        <li>{{ element.original_name }}</li>
+                        <li v-if="element.original_language === 'it'"><img src="../assets/Flag_of_Italy.svg.png" alt=""></li>
+                        <li v-else-if="element.original_language === 'en'"><img src="../assets/ukFlag.svg.png" alt=""></li>
+                        <li>{{ element.vote_average }}</li>
 
                     </ol>
 
@@ -44,21 +56,29 @@ export default {
     data: function(){
         return{
             searchKey : '',
-            movieArray : [],
+            movieList : [],
+            tvList : [],
+
         }
     },
     methods : {
-        getMovies(){
+        getVideo(){
             if (this.searchKey.length > 0){
 
                 axios.get('https://api.themoviedb.org/3/search/movie?api_key=f6177265d640c21353cbfcd0759d44d7&language=it&query=' + this.searchKey)
     
                 .then ((answer) => {
     
-                    console.log(answer.data.results)
-                this.movieArray = [...answer.data.results];
+                    // console.log(answer.data.results)
+                    this.movieList = [...answer.data.results];
     
                 });
+
+                axios.get('https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=' + this.searchKey)
+                .then ((answer) => {
+                    console.log(answer.data.results)
+                    this.tvList = [...answer.data.results]
+                })
             }
         }
     }
@@ -71,9 +91,16 @@ export default {
 @import '../style/variables.scss';
 
 header{
-    // background-color: $headerBgColor;
+    background-color: $headerBgColor;
     img{
-        height : 40px;
+        height : 100px;
+    }
+
+    .ms_tvserie,
+    .ms_movie{
+        img{
+            height: 10px;
+        }
     }
 }
 </style>
