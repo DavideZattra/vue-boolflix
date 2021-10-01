@@ -17,12 +17,15 @@
 
                 <div v-for="(element,index) in movieArray" :key="index">
 
-                    <ul>
+                    <ol>
                         <li>{{ element.title }}</li>
                         <li>{{ element.original_title }}</li>
-                        <li>{{ element.original_language }}</li>
+                        <li v-if="element.original_language === 'it'"><img src="../assets/Flag_of_Italy.svg.png" alt=""></li>
+                        <li  v-else-if="element.original_language === 'en'"><img src="../assets/ukFlag.svg.png" alt=""></li>
                         <li>{{ element.vote_average }}</li>
-                    </ul>
+                        <li>{{ element.original_language }}</li>
+
+                    </ol>
 
                 </div>
 
@@ -46,14 +49,17 @@ export default {
     },
     methods : {
         getMovies(){
-            axios.get('https://api.themoviedb.org/3/search/movie?api_key=f6177265d640c21353cbfcd0759d44d7&query=' + this.searchKey)
+            if (this.searchKey.length > 0){
 
-            .then ((answer) => {
-
-                console.log(answer.data.results)
-            this.movieArray = [...answer.data.results];
-
-            });
+                axios.get('https://api.themoviedb.org/3/search/movie?api_key=f6177265d640c21353cbfcd0759d44d7&language=it&query=' + this.searchKey)
+    
+                .then ((answer) => {
+    
+                    console.log(answer.data.results)
+                this.movieArray = [...answer.data.results];
+    
+                });
+            }
         }
     }
 
@@ -66,5 +72,8 @@ export default {
 
 header{
     // background-color: $headerBgColor;
+    img{
+        height : 40px;
+    }
 }
 </style>
