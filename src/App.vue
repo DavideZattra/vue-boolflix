@@ -29,7 +29,7 @@ export default {
 
       // this.videoList = [];
 
-      if (key.length > 0){
+      if (key.length > 1){
         Axios.get('https://api.themoviedb.org/3/search/movie?api_key=f6177265d640c21353cbfcd0759d44d7&language=it&query=' + key)
         .then ((answer) => {
             // console.log(answer.data.results)
@@ -54,5 +54,6 @@ export default {
 <style lang="scss">
 @import './style/general.scss';
 @import './style/variables.scss';
+
 
 </style>

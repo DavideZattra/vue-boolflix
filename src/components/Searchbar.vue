@@ -10,7 +10,7 @@
 
                 <div id="ms_searchbar" class="col-8 d-flex justify-content-end align-items-center">
 
-                    <input type="text" v-model="searchKey" @keyup.enter=" $emit('keyup.enter', searchKey)">
+                    <input type="text" v-model="searchKey" @keyup=" $emit('keyup', searchKey)">
                     <button class="btn btn-light" @click=" $emit('click', searchKey)">click</button>
                     
                 </div>
