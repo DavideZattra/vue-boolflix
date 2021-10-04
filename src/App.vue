@@ -1,24 +1,7 @@
 <template>
   <div id="app">
-    <Header @keyup.enter="getVideoList" @click="getVideoList"/>
-    <Main :movieList='movieList' :tvList='tvList'/>
-    <!-- <div class="container">
-      <div class="row">
-        <div class="col-2 border ms_tvserie" v-for="(element,index) in movieList" :key="index"  >
-
-          <ol  >
-              <li>{{ element.name }}</li>
-              <li>{{ element.original_name }}</li>
-              <li v-if="element.original_language === 'it'"><img src="./assets/Flag_of_Italy.svg.png" alt=""></li>
-              <li v-else-if="element.original_language === 'en'"><img src="./assets/ukFlag.svg.png" alt=""></li>
-              <li  v-else><img src="./assets/LGBT.svg.png" alt=""></li>
-              <li>{{ element.vote_average }}</li>
-
-          </ol>
-
-        </div> 
-      </div>
-    </div> -->
+    <Header @keyup="getVideoList" @click="getVideoList"/>
+    <Main :movieList='movieList' :tvList='tvList'/>  
   </div>
 </template>
 

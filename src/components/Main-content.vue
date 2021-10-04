@@ -5,7 +5,9 @@
     <section class="container">
 
       <div class="row justify-content-center">
-
+        <div v-if="movieList.length > 0" class="col-12 text-white">
+          <h2>Ecco i risultati per i film: </h2>
+        </div>
         <div class="col-3 text-white ms_video-card m-4" v-for="(element, index) in movieList" :key='index'>
 
           <div class="ms_cover-image">
@@ -19,6 +21,10 @@
             <li><span class="fw-bold">Overview:</span> {{ element.overview}}</li>
           </ul>
 
+        </div>
+
+        <div v-if="tvList.length > 0" class="col-12 text-white">
+          <h2>Ecco i risultati per le serie tv :</h2>
         </div>
 
         <div class="col-3 text-white ms_video-card m-4" v-for="(element, index) in tvList" :key='index'>
@@ -71,7 +77,6 @@ main{
     background-color: $headerBgColor;
     overflow: scroll;
     height: 375px;
-    // border: 2px solid white;
 
     .ms_cover-image{
       height: 100%;
